@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: binary-baran
+baran:
+  token: "---> IN HERE WE PLACE A BOT TOKEN <---"

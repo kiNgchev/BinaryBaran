@@ -42,6 +42,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.telegram:telegrambots-longpolling:8.3.0")
+    implementation("org.telegram:telegrambots-springboot-longpolling-starter:8.3.0")
+    implementation("org.telegram:telegrambots-client:8.3.0")
 }
 
 kotlin {
