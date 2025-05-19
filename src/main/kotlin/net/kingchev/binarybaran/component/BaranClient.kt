@@ -8,13 +8,22 @@ import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateC
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component
-class BaranClient(val props: CommonProperties) : SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+class BaranClient(val props: CommonProperties, val handler: CommandHandler) : SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
     override fun getBotToken(): String = props.token
 
     override fun getUpdatesConsumer(): LongPollingUpdateConsumer = this
 
     override fun consume(update: Update) {
-        // In here we place a command handler
-        TODO("Not yet implemented")
+        if (!update.hasMessage())
+            return
+
+        val args = update.message.text.split("\\s".toRegex())
+        val command = try {
+            handler.getCommand(args[0])
+        } catch (_: IllegalArgumentException) {
+            return
+        }
+
+        command.execute(update)
     }
 }
