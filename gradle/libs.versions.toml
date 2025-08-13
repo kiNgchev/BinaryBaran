@@ -1,0 +1,120 @@
+[versions]
+kotlin = "2.2.0"
+kotlinx-serialization = "1.9.0"
+spring-boot = "3.5.0"
+spring-cloud = "2025.0.0"
+mapstruct = "1.6.3"
+
+[libraries]
+# Spring Boot starters
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-cache = { module = "org.springframework.boot:spring-boot-starter-cache" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine" }
+
+# Spring Boot development and runtime
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+
+# Kotlin
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlin-serialization-json-jvm = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", version.ref = "kotlinx-serialization" }
+kotlin-serialization-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", version.ref = "kotlinx-serialization" }
+
+# Jackson
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+# Database
+liquibase-core = { module = "org.liquibase:liquibase-core" }
+postgresql = { module = "org.postgresql:postgresql" }
+
+# Monitoring
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
+
+# Other
+lombok = { module = "org.projectlombok:lombok" }
+
+# MapStruct
+mapstruct = { group = "org.mapstruct", name = "mapstruct", version.ref = "mapstruct" }
+mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version.ref = "mapstruct" }
+
+# Test dependencies
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
+
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
+
+testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[plugins]
+# Build plugins
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+dependency-managment = { id = "io.spring.dependency-management", version = "1.1.7" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.0-2.0.2" }
+ktgram = { id = "eu.vendeli.telegram-bot", version = "8.2.0" }
+
+[bundles]
+# Spring dependency bundles
+spring-implementation = [
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-data-jpa",
+    "jackson-module-kotlin",
+    "reactor-kotlin-extensions",
+    "liquibase-core",
+    "kotlin-reflect",
+    "spring-boot-starter-cache",
+    "caffeine",
+    "mapstruct"
+]
+
+kotlinx-serialization = [
+    "kotlin-serialization-json",
+    "kotlin-serialization-core",
+    "kotlin-serialization-json-jvm",
+    "kotlin-serialization-core-jvm"
+]
+
+spring-development-only = [
+    "spring-boot-devtools",
+]
+
+spring-runtime-only = [
+    "micrometer-registry-prometheus",
+    "postgresql",
+]
+
+spring-compile-only = [
+    "lombok"
+]
+
+spring-annotation-processor = [
+    "spring-boot-configuration-processor",
+    "lombok",
+    "mapstruct-processor"
+]
+
+# Test dependencies bundle
+spring-test-implementation = [
+    "spring-boot-starter-test",
+    "spring-boot-testcontainers",
+    "kotlin-test-junit5",
+    "kotlinx-coroutines-test",
+    "testcontainers-junit-jupiter",
+    "testcontainers-postgresql",
+]
+
+spring-test-runtime-only = [
+    "junit-platform-launcher"
+]
