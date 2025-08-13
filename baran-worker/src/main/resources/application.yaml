@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: "Binary Baran"
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/baran-db"
+    username: baran-user
+    password: secret
+
+
+baran:
+  token: "---> IN HERE WE PLACE A BOT TOKEN <---"
