@@ -1,6 +1,6 @@
 /*
 * СПИСОК КОМАНД:
-*
+* Отсос
 * */
 
 package net.kingchev.worker.commands
