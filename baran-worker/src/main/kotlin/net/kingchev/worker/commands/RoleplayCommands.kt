@@ -1,27 +1,19 @@
 /*
 * СПИСОК КОМАНД:
 * Отсос
-* Пригласить на чай
-* Пригласить на кофе
-* Отдаться
-* Съесть
-* Отпиздить питоняшку
 * */
 
 package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
+import eu.vendeli.tgbot.annotations.ArgParser
 import eu.vendeli.tgbot.annotations.CommandHandler
-import eu.vendeli.tgbot.annotations.CommonHandler
-import eu.vendeli.tgbot.annotations.ParamMapping
 import eu.vendeli.tgbot.annotations.UpdateHandler
-import eu.vendeli.tgbot.api.message.message
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
-import org.mapstruct.control.MappingControl.Use
-
+import net.kingchev.shared.telegram.BaranArgParser
 
 //@UpdateHandler([UpdateType.MESSAGE])
 //public suspend fun blowjob(update: MessageUpdate, user: User, client: TelegramBot) {
@@ -35,12 +27,8 @@ import org.mapstruct.control.MappingControl.Use
 //    sendMessage { "@${user.username} отсосал $target" }.send(update.message.chat, client)
 //}
 
-
-
-@CommandHandler(["отсос"])
-public suspend fun blowjob(update: MessageUpdate, user: User, client: TelegramBot) {
-    sendMessage{"@${user.username} пустили по кругу!"}.send(update.message.chat, client)
+@ArgParser(BaranArgParser::class)
+@CommandHandler(["отсос"], [UpdateType.MESSAGE])
+public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
+    sendMessage { "@${user.username} отсосал $param1" }.send(update.message.chat, client)
 }
-
-
-

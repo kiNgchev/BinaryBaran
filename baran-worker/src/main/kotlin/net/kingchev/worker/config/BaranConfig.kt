@@ -14,10 +14,10 @@ import org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(BaranProperties::class)
 public class BaranConfig(private val props: BaranProperties) {
     @Bean
-    public fun zentraClient(classManager: BaranClassManager): TelegramBot {
+    public fun baranClient(classManager: BaranClassManager): TelegramBot {
         val bot = TelegramBot(props.token)
         {
-            identifier = "zentra-bot"
+            identifier = "baran-bot"
             this.classManager = classManager
         }
 
