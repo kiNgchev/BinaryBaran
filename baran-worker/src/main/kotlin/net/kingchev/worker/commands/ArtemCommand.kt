@@ -12,3 +12,8 @@ import eu.vendeli.tgbot.types.component.UpdateType
 public suspend fun artem(update: MessageUpdate, user: User, client: TelegramBot) {
     sendMessage { "артем" }.send(update.message.chat, client)
 }
+
+@CommonHandler.Regex("[Г, г]ойда", scope = [UpdateType.MESSAGE])
+public suspend fun goida(update: MessageUpdate, user: User, client: TelegramBot) {
+    sendMessage { "ГОЙДА ZOV ZOV ZZZ ZOV 333 ZA НАШИХ\nКРЫМ РОZZИИ" }.send(update.message.chat, client)
+}
