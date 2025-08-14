@@ -8,7 +8,13 @@ import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
 
-@CommonHandler.Regex("[Аа]рт[её]м", scope = [UpdateType.MESSAGE])
+@CommonHandler.Regex("[А, а]рт[е, ё]м", scope = [UpdateType.MESSAGE])
 public suspend fun artem(update: MessageUpdate, user: User, client: TelegramBot) {
     sendMessage { "артем" }.send(update.message.chat, client)
+}
+
+// Гойда
+@CommonHandler.Regex("[Г, г]ойда", scope = [UpdateType.MESSAGE])
+public suspend fun goida(update: MessageUpdate, user: User, client: TelegramBot) {
+    sendMessage { "ГОЙДА ZOV ZOV ZZZ ZOV 333 ZA НАШИХ\nКРЫМ РОZZИИ" }.send(update.message.chat, client)
 }
