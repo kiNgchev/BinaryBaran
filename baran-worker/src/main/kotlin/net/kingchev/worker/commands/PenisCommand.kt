@@ -1,3 +1,4 @@
+package net.kingchev.worker.commands
 /*
  * BinaryBaran
  * Copyright (C) 2025 Evgeny K.
