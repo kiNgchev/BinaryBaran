@@ -24,6 +24,7 @@ import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.ParseMode
+import net.kingchev.shared.telegram.utils.appendEscaped
 import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
@@ -32,10 +33,10 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 
     val username = getUserName(user)
 
-    message.append("${username}, красивые СИСЬКИ")
+    message.appendEscaped("${username}, красивые СИСЬКИ")
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.Markdown }
+        .options { parseMode = ParseMode.MarkdownV2 }
         .send(update.message.chat, client)
 }
 
@@ -45,17 +46,17 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
 
     val username = getUserName(user)
 
-    message.append("${username}, красивые ПИСЬКИ.")
+    message.appendEscaped("${username}, красивые ПИСЬКИ.")
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
     if (rnd <= 50) {
         // todo: random user from db cache (maybe)
-        message.append("\nНо не у @NuclearMyraBey")
+        message.appendEscaped("\nНо не у @NuclearMyraBey")
     }
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.Markdown }
+        .options { parseMode = ParseMode.MarkdownV2 }
         .send(update.message.chat, client)
 }
 
