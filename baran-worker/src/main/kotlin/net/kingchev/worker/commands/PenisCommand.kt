@@ -26,12 +26,16 @@ import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
+    val message = StringBuilder()
+
     val username = StringBuilder(user.username)
     if (username.isEmpty()) {
         username.append("[даун](${user.id})")
     } else {
         username.insert(0, '@')
     }
+
+    message.append("${username}, красивые ПИСЬКИ.")
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
@@ -40,5 +44,5 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
         username.append("\nНо не у @NuclearMyraBey")
     }
 
-    sendMessage { "${username}, красивые ПИСЬКИ." }.send(update.message.chat, client)
+    sendMessage { message.toString() }.send(update.message.chat, client)
 }
