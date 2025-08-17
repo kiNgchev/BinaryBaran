@@ -31,35 +31,35 @@ import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
-    val message = StringBuilder()
-
     val username = user.link
 
-    message.append(username)
-    message.appendEscaped(", красивые и огромные СИСЬКИ!")
+    val message = buildString {
+        append(username)
+        appendEscaped(", красивые и огромные СИСЬКИ!")
+    }
 
-    sendMessage { message.toString() }
+    sendMessage { message }
         .markdown()
         .send(update.message.chat, client)
 }
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
-    val message = StringBuilder()
 
     val username = user.link
+    val message = buildString {
+        append(username)
+        appendEscaped(", красивые ПИСЬКИ!")
 
-    message.append(username)
-    message.appendEscaped(", красивые ПИСЬКИ!")
+        val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
-    val rnd = ThreadLocalRandom.current().nextInt(1,100)
-
-    if (rnd <= 50) {
-        // todo: random user from db cache (maybe)
-        message.appendEscaped("\nНе шовел как у NuclearMyraBey ")
+        if (rnd <= 50) {
+            // todo: random user from db cache (maybe)
+            appendEscaped("\nНе шовел как у NuclearMyraBey ")
+        }
     }
 
-    sendMessage { message.toString() }
+    sendMessage { message }
         .markdown()
         .send(update.message.chat, client)
 }
