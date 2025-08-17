@@ -25,12 +25,12 @@ import eu.vendeli.tgbot.types.component.MessageUpdate
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
-    var username = user.username;
-    username = if (username.isNullOrEmpty()) {
-        "[даун](${user.id})"
+    val username = StringBuilder(user.username)
+    if (username.isEmpty()) {
+        username.append("[даун](${user.id})")
     } else {
-        username.apply { "@" }
+        username.insert(0,'@')
     }
 
-    sendMessage { "${username}, огромные СИСЬКИ" }.send(update.message.chat, client)
+    sendMessage { "$username, огромные СИСЬКИ" }.send(update.message.chat, client)
 }
