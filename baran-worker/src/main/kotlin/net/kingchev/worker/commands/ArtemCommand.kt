@@ -19,7 +19,6 @@
 package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
-import eu.vendeli.tgbot.annotations.CommandHandler
 import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User

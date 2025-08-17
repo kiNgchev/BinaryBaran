@@ -24,7 +24,6 @@ import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import net.kingchev.shared.telegram.utils.appendEscaped
-import net.kingchev.shared.telegram.utils.getLink
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.markdown
 import java.util.concurrent.ThreadLocalRandom
