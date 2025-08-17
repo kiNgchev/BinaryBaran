@@ -39,6 +39,6 @@ kotlin {
     explicitApi()
 
     compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xcontext-sensitive-resolution")
     }
 }
