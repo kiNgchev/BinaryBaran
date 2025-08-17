@@ -11,6 +11,13 @@ services:
     restart: unless-stopped
     networks:
       - bot-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          memory: 128M
 
   bot:
     build: .
@@ -26,6 +33,13 @@ services:
     restart: unless-stopped
     networks:
       - bot-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          memory: 128M
 
 volumes:
   postgres_data:
