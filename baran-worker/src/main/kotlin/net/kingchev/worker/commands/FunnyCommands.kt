@@ -1,4 +1,3 @@
-package net.kingchev.worker.commands
 /*
  * BinaryBaran
  * Copyright (C) 2025 Evgeny K.
@@ -17,11 +16,14 @@ package net.kingchev.worker.commands
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+package net.kingchev.worker.commands
+
 import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
+import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
@@ -35,6 +37,29 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
     }
 
     message.append("${username}, красивые СИСЬКИ")
+
+    sendMessage { message.toString() }.send(update.message.chat, client)
+}
+
+@CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
+public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
+    val message = StringBuilder()
+
+    val username = StringBuilder(user.username)
+    if (username.isEmpty()) {
+        username.append("[даун](${user.id})")
+    } else {
+        username.insert(0, '@')
+    }
+
+    message.append("${username}, красивые ПИСЬКИ.")
+
+    val rnd = ThreadLocalRandom.current().nextInt(1,100)
+
+    if (rnd <= 50) {
+        // todo: random user from db cache (maybe)
+        message.append("\nНо не у @NuclearMyraBey")
+    }
 
     sendMessage { message.toString() }.send(update.message.chat, client)
 }
