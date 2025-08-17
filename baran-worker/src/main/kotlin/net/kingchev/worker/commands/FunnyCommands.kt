@@ -35,7 +35,7 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
     message.append("${username}, красивые СИСЬКИ")
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.MarkdownV2 }
+        .options { parseMode = ParseMode.Markdown }
         .send(update.message.chat, client)
 }
 
@@ -55,7 +55,7 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
     }
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.MarkdownV2 }
+        .options { parseMode = ParseMode.Markdown }
         .send(update.message.chat, client)
 }
 
