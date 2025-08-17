@@ -34,7 +34,7 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
         username.insert(0,'@')
     }
 
-    message.append("${username}, красивые ПИСЬКИ.")
+    message.append("${username}, красивые СИСЬКИ")
 
     sendMessage { message.toString() }.send(update.message.chat, client)
 }

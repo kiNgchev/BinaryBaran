@@ -41,7 +41,7 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
 
     if (rnd <= 50) {
         // todo: random user from db cache (maybe)
-        username.append("\nНо не у @NuclearMyraBey")
+        message.append("\nНо не у @NuclearMyraBey")
     }
 
     sendMessage { message.toString() }.send(update.message.chat, client)
