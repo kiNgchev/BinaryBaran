@@ -25,19 +25,21 @@ import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.ParseMode
 import net.kingchev.shared.telegram.utils.appendEscaped
+import net.kingchev.shared.telegram.utils.getUsername
+import net.kingchev.shared.telegram.utils.markdown
 import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = getUserName(user)
+    val username = getUsername(user)
 
-    message.append("$username")
+    message.append(username)
     message.appendEscaped(", красивые и огромные СИСЬКИ!")
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.MarkdownV2 }
+        .markdown()
         .send(update.message.chat, client)
 }
 
@@ -45,9 +47,9 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = getUserName(user)
+    val username = getUsername(user)
 
-    message.append("$username")
+    message.append(username)
     message.appendEscaped(", красивые ПИСЬКИ!")
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
@@ -58,21 +60,6 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
     }
 
     sendMessage { message.toString() }
-        .options { parseMode = ParseMode.MarkdownV2 }
+        .markdown()
         .send(update.message.chat, client)
-}
-
-private fun getUserName(user: User): StringBuilder {
-    val username = StringBuilder(user.username ?: "")
-
-    if (username.isEmpty()) {
-        username.append("[даун](tg://user?id=${user.id})")
-    } else {
-        // [name](tg://user?id=123123)
-        username.insert(0, "[")
-        username.append("]")
-        username.append("(tg://user?id=${user.id})")
-    }
-
-    return username
 }
