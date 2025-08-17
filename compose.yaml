@@ -18,11 +18,11 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/baran-db
       SPRING_DATASOURCE_USERNAME: baran-user
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:?err}
 #     SPRING_PROFILES_ACTIVE: prod
     depends_on:
       - postgres
-    restart: on-failure
+    restart: unless-stopped
     networks:
       - backend-network
 
