@@ -18,24 +18,18 @@
 
 package net.kingchev.worker.entity
 
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Column
-import jakarta.persistence.Id
 import jakarta.persistence.Entity
+import jakarta.persistence.Id
 
 @Entity
 public data class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val id: Long,
 
     @Column
     val username: String? = null,
 
     @Column
     val name: String,
-
-    @Column(nullable = false)
-    val tgId: Long
 )

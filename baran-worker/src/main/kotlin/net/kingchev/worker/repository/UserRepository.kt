@@ -22,6 +22,5 @@ import net.kingchev.worker.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 public interface UserRepository : JpaRepository<User, Long> {
-    public fun getByTgId(id: Long)
     public fun getByUsername(username: String)
 }
