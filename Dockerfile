@@ -9,7 +9,6 @@ COPY baran-shared baran-shared
 COPY baran-models baran-models
 COPY baran-worker baran-worker
 COPY settings.gradle.kts .
-COPY gradle.properties gradle.properties
 
 RUN chmod +x gradlew
 RUN ./gradlew :baran-worker:build -x test --no-daemon
