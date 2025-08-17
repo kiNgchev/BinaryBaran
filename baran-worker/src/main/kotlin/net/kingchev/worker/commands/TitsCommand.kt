@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * BinaryBaran
  * Copyright (C) 2025 Evgeny K.
@@ -16,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+=======
+>>>>>>> 1628139a5a675111aef2f369936740831a424973
 package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
