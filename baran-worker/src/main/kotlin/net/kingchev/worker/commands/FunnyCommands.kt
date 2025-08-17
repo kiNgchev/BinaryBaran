@@ -30,12 +30,9 @@ import java.util.concurrent.ThreadLocalRandom
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = StringBuilder(user.username)
-    if (username.isEmpty()) {
-        username.append("[даун](tg://user?id=${user.id})")
-    } else {
-        username.insert(0,'@')
-    }
+    var username = StringBuilder(user.username)
+
+    username = executeNameChange(username,user)
 
     message.append("${username}, красивые СИСЬКИ")
 
@@ -48,12 +45,9 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = StringBuilder(user.username)
-    if (username.isEmpty()) {
-        username.append("[даун](${user.id})")
-    } else {
-        username.insert(0, '@')
-    }
+    var username = StringBuilder(user.username)
+
+    username = executeNameChange(username,user)
 
     message.append("${username}, красивые ПИСЬКИ.")
 
@@ -67,4 +61,14 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
     sendMessage { message.toString() }
         .options { parseMode = ParseMode.MarkdownV2 }
         .send(update.message.chat, client)
+}
+
+private fun executeNameChange(username: StringBuilder, user: User): StringBuilder {
+    if (username.isEmpty()) {
+        username.append("[даун](tg://user?id=${user.id})")
+    } else {
+        username.insert(0, '@')
+    }
+
+    return username
 }
