@@ -1,3 +1,4 @@
+package net.kingchev.worker.commands
 /*
  * BinaryBaran
  * Copyright (C) 2025 Evgeny K.
@@ -25,18 +26,18 @@ import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
-    var username = user.username;
-    username = if (username.isNullOrEmpty()) {
-        "[даун](${user.id})"
+    val username = StringBuilder(user.username)
+    if (username.isEmpty()) {
+        username.append("[даун](${user.id})")
     } else {
-        username.apply { "@" }
+        username.insert(0, '@')
     }
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
     if (rnd <= 50) {
         // todo: random user from db cache (maybe)
-        username = username.apply { "\nНо не у @NuclearMyraBey" }
+        username.append("\nНо не у @NuclearMyraBey")
     }
 
     sendMessage { "${username}, красивые ПИСЬКИ." }.send(update.message.chat, client)
