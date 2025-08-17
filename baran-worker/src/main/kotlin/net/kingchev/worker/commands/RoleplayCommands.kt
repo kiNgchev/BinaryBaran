@@ -25,20 +25,30 @@ package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.annotations.ArgParser
+import eu.vendeli.tgbot.annotations.CommandHandler
 import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
-import net.kingchev.shared.telegram.BaranArgParser
+import net.kingchev.shared.telegram.parser.BaranArgParser
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.markdown
 
 @ArgParser(BaranArgParser::class)
-@CommonHandler.Regex("отсос", scope = [UpdateType.MESSAGE])
+@CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
 public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
     sendMessage { "$author отсосал $param1" }
+        .markdown()
+        .send(update.message.chat, client)
+}
+
+@ArgParser(BaranArgParser::class)
+@CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
+public suspend fun hugs(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
+    val author = user.link
+    sendMessage { "$author обнял $param1" }
         .markdown()
         .send(update.message.chat, client)
 }

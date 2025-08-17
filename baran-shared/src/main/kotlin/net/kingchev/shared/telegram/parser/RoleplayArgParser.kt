@@ -16,18 +16,17 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package net.kingchev.shared.telegram
+package net.kingchev.shared.telegram.parser
 
 import eu.vendeli.tgbot.interfaces.helper.ArgumentParser
 
-public object BaranArgParser : ArgumentParser {
+// Reserved for future commands
+public object RoleplayArgParser : ArgumentParser {
     override fun parse(text: String): Map<String, String> {
-        var index = 1
-        val result = mutableMapOf<String, String>()
-        text.split(" ").forEach { arg ->
-            result["param$index"] = arg
-            index++
-        }
-        return result
+        val args = text.split(' ')
+        return mutableMapOf(
+            "target" to args[0],
+            "reason" to args.subList(1, args.size).joinToString(" "),
+        )
     }
 }

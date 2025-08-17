@@ -26,9 +26,9 @@ import eu.vendeli.tgbot.types.options.Options
 import eu.vendeli.tgbot.types.options.OptionsParseMode
 
 public val User.link: String
-    get() = getLink(this)
+    get() = getUserLink(this)
 
-public fun getLink(user: User): String {
+public fun getUserLink(user: User): String {
     val fullName = if (user.lastName != null) " ${user.firstName} ${user.lastName}" else user.firstName
     val username = StringBuilder(user.username ?: "")
 
