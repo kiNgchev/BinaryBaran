@@ -33,7 +33,8 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 
     val username = getUserName(user)
 
-    message.appendEscaped("${username}, красивые и огромные СИСЬКИ!")
+    message.append("$username")
+    message.appendEscaped(", красивые и огромные СИСЬКИ!")
 
     sendMessage { message.toString() }
         .options { parseMode = ParseMode.MarkdownV2 }
@@ -46,7 +47,8 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
 
     val username = getUserName(user)
 
-    message.appendEscaped("${username}, красивые ПИСЬКИ!")
+    message.append("$username")
+    message.appendEscaped(", красивые ПИСЬКИ!")
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
