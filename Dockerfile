@@ -1,18 +1,28 @@
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /app
 
 COPY gradlew .
 COPY gradle gradle
-COPY build.gradle .
-COPY settings.gradle .
+COPY buildSrc buildSrc
+COPY baran-shared baran-shared
+COPY baran-models baran-models
+COPY baran-worker baran-worker
+COPY settings.gradle.kts .
+COPY gradle.properties gradle.properties
 
 RUN chmod +x gradlew
-RUN ./gradlew dependencies --no-daemon
+RUN ./gradlew :baran-worker:build -x test --no-daemon
 
-COPY src src
-RUN ./gradlew build -x test --no-daemon
+FROM eclipse-temurin:21-jre-alpine
 
-RUN find build/libs/ -name "*.jar" -exec cp {} app.jar \;
+WORKDIR /app
+
+RUN addgroup -g 1001 -S appgroup
+RUN adduser -u 1001 -S appuser -G appgroup
+
+COPY --from=builder /app/baran-worker/build/libs/*.jar app.jar
+
+USER appuser
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
