@@ -1,11 +1,19 @@
 spring:
-  application:
-    name: "Binary Baran"
   datasource:
-    url: "jdbc:postgresql://localhost:5432/baran-db"
-    username: baran-user
-    password: secret
-
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
 
 baran:
-  token: "---> IN HERE WE PLACE A BOT TOKEN <---"
+  token: ${BOT_TOKEN:}
