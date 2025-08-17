@@ -26,22 +26,22 @@ import eu.vendeli.tgbot.types.options.Options
 import eu.vendeli.tgbot.types.options.OptionsParseMode
 
 public val User.link: String
-    get() = getUsername(this)
+    get() = getLink(this)
 
-public fun getUsername(user: User): String {
+public fun getLink(user: User): String {
     val fullName = if (user.lastName != null) " ${user.firstName} ${user.lastName}" else user.firstName
     val username = StringBuilder(user.username ?: "")
 
-    if (username.isEmpty()) {
-        username.append("[$fullName](tg://user?id=${user.id})")
-    } else {
-        // [name](tg://user?id=123123)
-        username.insert(0, "[")
-        username.append("]")
-        username.append("(tg://user?id=${user.id})")
+    return buildString {
+        if (username.isEmpty()) {
+            append("[$fullName](tg://user?id=${user.id})")
+        } else {
+            // [name](tg://user?id=123123)
+            insert(0, "[")
+            append("]")
+            append("(tg://user?id=${user.id})")
+        }
     }
-
-    return username.toString()
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -49,6 +49,14 @@ public inline fun <T, R, O> T.markdown(crossinline block: O.() -> Unit = {}): T
 where T : TgAction<R>, T : OptionsFeature<T, O>, O : Options, O : OptionsParseMode =
     options {
         parseMode = ParseMode.Markdown
+        block()
+    }
+
+@Suppress("NOTHING_TO_INLINE")
+public inline fun <T, R, O> T.markdownV2(crossinline block: O.() -> Unit = {}): T
+        where T : TgAction<R>, T : OptionsFeature<T, O>, O : Options, O : OptionsParseMode =
+    options {
+        parseMode = ParseMode.MarkdownV2
         block()
     }
 

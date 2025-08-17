@@ -23,9 +23,9 @@ import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
-import eu.vendeli.tgbot.types.component.ParseMode
 import net.kingchev.shared.telegram.utils.appendEscaped
-import net.kingchev.shared.telegram.utils.getUsername
+import net.kingchev.shared.telegram.utils.getLink
+import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.markdown
 import java.util.concurrent.ThreadLocalRandom
 
@@ -33,7 +33,7 @@ import java.util.concurrent.ThreadLocalRandom
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = getUsername(user)
+    val username = user.link
 
     message.append(username)
     message.appendEscaped(", красивые и огромные СИСЬКИ!")
@@ -47,7 +47,7 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    val username = getUsername(user)
+    val username = user.link
 
     message.append(username)
     message.appendEscaped(", красивые ПИСЬКИ!")
