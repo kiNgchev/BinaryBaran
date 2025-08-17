@@ -23,6 +23,7 @@ import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
+import eu.vendeli.tgbot.types.component.ParseMode
 import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
@@ -31,14 +32,16 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 
     val username = StringBuilder(user.username)
     if (username.isEmpty()) {
-        username.append("[даун](${user.id})")
+        username.append("[даун](tg://user?id=${user.id})")
     } else {
         username.insert(0,'@')
     }
 
     message.append("${username}, красивые СИСЬКИ")
 
-    sendMessage { message.toString() }.send(update.message.chat, client)
+    sendMessage { message.toString() }
+        .options { parseMode = ParseMode.MarkdownV2 }
+        .send(update.message.chat, client)
 }
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
@@ -61,5 +64,7 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
         message.append("\nНо не у @NuclearMyraBey")
     }
 
-    sendMessage { message.toString() }.send(update.message.chat, client)
+    sendMessage { message.toString() }
+        .options { parseMode = ParseMode.MarkdownV2 }
+        .send(update.message.chat, client)
 }
