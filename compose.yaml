@@ -1,13 +1,34 @@
 services:
   postgres:
     image: postgres:latest
+    container_name: postgres
     environment:
       POSTGRES_DB: baran-db
-      POSTGRES_PASSWORD: secret
       POSTGRES_USER: baran-user
-    ports:
-      - '5432:5432'
-  redis:
-    image: 'redis:latest'
-    ports:
-      - '6379:6379'
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?err}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - backend-network
+
+  backend:
+    build: .
+    container_name: backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/baran-db
+      SPRING_DATASOURCE_USERNAME: baran-user
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+#     SPRING_PROFILES_ACTIVE: prod
+    depends_on:
+      - postgres
+    restart: on-failure
+    networks:
+      - backend-network
+
+volumes:
+  postgres_data:
+
+networks:
+  backend-network:
+    driver: bridge
