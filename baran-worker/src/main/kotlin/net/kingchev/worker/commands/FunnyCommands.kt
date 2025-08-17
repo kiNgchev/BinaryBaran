@@ -45,7 +45,7 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
 
     val username = getUserName(user)
 
-    message.append("${username}, красивые ПИСЬКИ\\.")
+    message.append("${username}, красивые ПИСЬКИ.")
 
     val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
