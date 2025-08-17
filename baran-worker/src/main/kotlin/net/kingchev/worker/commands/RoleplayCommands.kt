@@ -1,4 +1,22 @@
 /*
+ *     BinaryBaran
+ *     Copyright (C) 2025 kiNgchev, NuclearMyraBey
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/*
 * СПИСОК КОМАНД:
 * Отсос
 * */
@@ -7,28 +25,17 @@ package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.annotations.ArgParser
-import eu.vendeli.tgbot.annotations.CommandHandler
-import eu.vendeli.tgbot.annotations.UpdateHandler
+import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
 import net.kingchev.shared.telegram.BaranArgParser
-
-//@UpdateHandler([UpdateType.MESSAGE])
-//public suspend fun blowjob(update: MessageUpdate, user: User, client: TelegramBot) {
-//    if (!update.text.startsWith("отсосать", true)) return
-//    val args = update.text.split(" ")
-//    if (args.size < 2)
-//        return sendMessage { "Кому отсосать хочешь?" }.send(update.message.chat, client)
-//
-//    val target = args[1]
-//
-//    sendMessage { "@${user.username} отсосал $target" }.send(update.message.chat, client)
-//}
+import net.kingchev.shared.telegram.utils.getUsername
 
 @ArgParser(BaranArgParser::class)
-@CommandHandler(["отсос"], [UpdateType.MESSAGE])
+@CommonHandler.Regex("отсос", scope = [UpdateType.MESSAGE])
 public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
-    sendMessage { "@${user.username} отсосал $param1" }.send(update.message.chat, client)
+    val author = getUsername(user)
+    sendMessage { "$author отсосал $param1" }.send(update.message.chat, client)
 }
