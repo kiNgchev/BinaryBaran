@@ -10,25 +10,26 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
-      - backend-network
+      - bot-network
 
-  backend:
+  bot:
     build: .
-    container_name: backend
+    container_name: bot
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/baran-db
       SPRING_DATASOURCE_USERNAME: baran-user
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:?err}
+      BOT_TOKEN: ${BOT_TOKEN}
 #     SPRING_PROFILES_ACTIVE: prod
     depends_on:
       - postgres
     restart: unless-stopped
     networks:
-      - backend-network
+      - bot-network
 
 volumes:
   postgres_data:
 
 networks:
-  backend-network:
+  bot-network:
     driver: bridge
