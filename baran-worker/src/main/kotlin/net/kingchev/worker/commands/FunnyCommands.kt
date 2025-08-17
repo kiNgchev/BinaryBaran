@@ -30,9 +30,7 @@ import java.util.concurrent.ThreadLocalRandom
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    var username = StringBuilder(user.username)
-
-    username = executeNameChange(username,user)
+    val username = getUserName(user)
 
     message.append("${username}, красивые СИСЬКИ")
 
@@ -45,9 +43,7 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
     val message = StringBuilder()
 
-    var username = StringBuilder(user.username)
-
-    username = executeNameChange(username,user)
+    val username = getUserName(user)
 
     message.append("${username}, красивые ПИСЬКИ.")
 
@@ -63,7 +59,9 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
         .send(update.message.chat, client)
 }
 
-private fun executeNameChange(username: StringBuilder, user: User): StringBuilder {
+private fun getUserName(user: User): StringBuilder {
+    val username = StringBuilder(user.username ?: "")
+
     if (username.isEmpty()) {
         username.append("[даун](tg://user?id=${user.id})")
     } else {
