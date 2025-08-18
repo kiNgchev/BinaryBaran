@@ -32,7 +32,7 @@ private fun escapeMarkdownV2(text: String): String {
     val specialChars = setOf('_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', ',', '!')
     return buildString {
         text.forEach { char ->
-            if (char in specialChars) append('\\')
+            if (char in specialChars) append("\\")
             append(char)
         }
     }
