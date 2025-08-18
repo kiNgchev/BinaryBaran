@@ -30,17 +30,9 @@ public val User.link: String
 
 public fun getUserLink(user: User): String {
     val fullName = if (user.lastName != null) " ${user.firstName} ${user.lastName}" else user.firstName
-    val username = StringBuilder(user.username ?: "")
 
     return buildString {
-        if (username.isEmpty()) {
-            append("[$fullName](tg://user?id=${user.id})")
-        } else {
-            // [name](tg://user?id=123123)
-            insert(0, "[")
-            append("]")
-            append("(tg://user?id=${user.id})")
-        }
+        append("[$fullName](tg://user?id=${user.id})")
     }
 }
 
