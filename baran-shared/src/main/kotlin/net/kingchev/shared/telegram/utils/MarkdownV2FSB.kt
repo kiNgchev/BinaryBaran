@@ -20,12 +20,12 @@ package net.kingchev.shared.telegram.utils
 
 public fun StringBuilder.appendEscaped(text: String): StringBuilder {
     val escapedText = escapeMarkdownV2(text)
-    return append(escapedText)
+    return append(text)
 }
 
 public fun StringBuilder.appendLineEscaped(text: String): StringBuilder {
     val escapedText = escapeMarkdownV2(text)
-    return appendLine(escapedText)
+    return appendLine(text)
 }
 
 private fun escapeMarkdownV2(text: String): String {

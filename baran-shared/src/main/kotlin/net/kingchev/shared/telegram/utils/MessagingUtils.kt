@@ -32,7 +32,7 @@ public suspend fun sendMessageWEH(block: EntitiesCtxBuilder<SendMessageAction>.(
                                   client: TelegramBot) {
     return try {
         sendMessage { block() }
-            .markdownV2()
+            .markdown()
             .send(update.message.chat, client)
     } catch (e: Exception) {
         sendMessage { e.message.toString() }
