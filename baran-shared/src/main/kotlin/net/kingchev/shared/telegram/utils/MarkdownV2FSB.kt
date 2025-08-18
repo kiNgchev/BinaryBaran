@@ -19,20 +19,20 @@
 package net.kingchev.shared.telegram.utils
 
 public fun StringBuilder.appendEscaped(text: String): StringBuilder {
-    val escapedText = escapeMarkdownV2(text)
-    return append(escapedText)
+    //val escapedText = escapeMarkdownV2(text)
+    return append(text)
 }
 
 public fun StringBuilder.appendLineEscaped(text: String): StringBuilder {
-    val escapedText = escapeMarkdownV2(text)
-    return appendLine(escapedText)
+    //val escapedText = escapeMarkdownV2(text)
+    return appendLine(text)
 }
 
 private fun escapeMarkdownV2(text: String): String {
     val specialChars = setOf('_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', ',', '!')
     return buildString {
         text.forEach { char ->
-            if (char in specialChars) append("\\\\")
+            if (char in specialChars) append("\\")
             append(char)
         }
     }
