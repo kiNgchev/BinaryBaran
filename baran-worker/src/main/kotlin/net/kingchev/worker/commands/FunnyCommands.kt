@@ -23,43 +23,42 @@ import eu.vendeli.tgbot.annotations.CommonHandler
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
-import eu.vendeli.tgbot.types.component.ParseMode
 import net.kingchev.shared.telegram.utils.appendEscaped
-import net.kingchev.shared.telegram.utils.getUsername
+import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.markdown
 import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
 public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) {
-    val message = StringBuilder()
+    val username = user.link
 
-    val username = getUsername(user)
+    val message = buildString {
+        append(username)
+        appendEscaped(", красивые и огромные СИСЬКИ!")
+    }
 
-    message.append(username)
-    message.appendEscaped(", красивые и огромные СИСЬКИ!")
-
-    sendMessage { message.toString() }
+    sendMessage { message }
         .markdown()
         .send(update.message.chat, client)
 }
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
-    val message = StringBuilder()
 
-    val username = getUsername(user)
+    val username = user.link
+    val message = buildString {
+        append(username)
+        appendEscaped(", красивые ПИСЬКИ!")
 
-    message.append(username)
-    message.appendEscaped(", красивые ПИСЬКИ!")
+        val rnd = ThreadLocalRandom.current().nextInt(1,100)
 
-    val rnd = ThreadLocalRandom.current().nextInt(1,100)
-
-    if (rnd <= 50) {
-        // todo: random user from db cache (maybe)
-        message.appendEscaped("\nНе шовел как у NuclearMyraBey ")
+        if (rnd <= 50) {
+            // todo: random user from db cache (maybe)
+            appendEscaped("\nНе шовел как у NuclearMyraBey ")
+        }
     }
 
-    sendMessage { message.toString() }
+    sendMessage { message }
         .markdown()
         .send(update.message.chat, client)
 }

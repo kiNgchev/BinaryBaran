@@ -16,17 +16,17 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package net.kingchev.worker
+package net.kingchev.shared.telegram.parser
 
-import net.kingchev.worker.config.BaranConfig
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-import org.springframework.context.annotation.Import
+import eu.vendeli.tgbot.interfaces.helper.ArgumentParser
 
-@SpringBootApplication
-@Import(BaranConfig::class)
-public class BinaryBaranWorker
-
-public fun main(args: Array<String>) {
-    runApplication<BinaryBaranWorker>(*args)
+// Reserved for future commands
+public object RoleplayArgParser : ArgumentParser {
+    override fun parse(text: String): Map<String, String> {
+        val args = text.split(' ')
+        return mutableMapOf(
+            "target" to args[0],
+            "reason" to args.subList(1, args.size).joinToString(" "),
+        )
+    }
 }
