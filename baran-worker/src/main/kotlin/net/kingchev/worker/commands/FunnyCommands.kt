@@ -20,12 +20,11 @@ package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.annotations.CommonHandler
-import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import net.kingchev.shared.telegram.utils.appendEscaped
 import net.kingchev.shared.telegram.utils.link
-import net.kingchev.shared.telegram.utils.markdown
+import net.kingchev.shared.telegram.utils.sendMessageWEH
 import java.util.concurrent.ThreadLocalRandom
 
 @CommonHandler.Regex("сиськи", options = [RegexOption.IGNORE_CASE])
@@ -37,15 +36,16 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
         appendEscaped(", красивые и огромные СИСЬКИ!")
     }
 
-    sendMessage { message }
-        .markdown()
-        .send(update.message.chat, client)
+    sendMessageWEH({
+        message
+    }, update, client)
 }
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
 public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot) {
 
     val username = user.link
+
     val message = buildString {
         append(username)
         appendEscaped(", красивые ПИСЬКИ!")
@@ -58,7 +58,7 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
         }
     }
 
-    sendMessage { message }
-        .markdown()
-        .send(update.message.chat, client)
+    sendMessageWEH({
+        message
+    }, update, client)
 }

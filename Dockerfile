@@ -11,7 +11,7 @@ COPY baran-worker baran-worker
 COPY settings.gradle.kts .
 
 RUN chmod +x gradlew
-RUN ./gradlew :baran-worker:build -x test --no-daemon
+RUN ./gradlew :baran-worker:build -x test --no-daemon --parallel
 
 FROM eclipse-temurin:21-jre-alpine
 
