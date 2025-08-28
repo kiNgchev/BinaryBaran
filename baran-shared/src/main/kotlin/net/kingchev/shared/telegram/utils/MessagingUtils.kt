@@ -27,13 +27,15 @@ import eu.vendeli.tgbot.utils.builders.EntitiesCtxBuilder
 /**
  * Sends message with error handler
  */
-public suspend fun sendMessageWEH(block: EntitiesCtxBuilder<SendMessageAction>.() -> String,
-                                  update: MessageUpdate,
-                                  client: TelegramBot) {
+public suspend fun sendMessageWEH(update: MessageUpdate,
+                                  client: TelegramBot,
+                                  block: EntitiesCtxBuilder<SendMessageAction>.() -> String) {
     return try {
-        sendMessage { block() }
-            .markdown()
-            .send(update.message.chat, client)
+        sendMessage {
+
+            block()
+
+        }.markdown().send(update.message.chat, client)
     } catch (e: Exception) {
         sendMessage { e.message.toString() }
             .send(update.message.chat, client)

@@ -19,6 +19,7 @@
 package net.kingchev.worker.config
 
 import eu.vendeli.tgbot.TelegramBot
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.kingchev.shared.telegram.BaranClassManager
@@ -31,12 +32,14 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan(basePackages = ["net.kingchev"])
 @EnableConfigurationProperties(BaranProperties::class)
 public class BaranConfig(private val props: BaranProperties) {
+    @OptIn(DelicateCoroutinesApi::class) // idea
     @Bean
     public fun baranClient(classManager: BaranClassManager): TelegramBot {
         val bot = TelegramBot(props.token)
         {
             identifier = "baran-bot"
             this.classManager = classManager
+            throwExOnActionsFailure = true
         }
 
         GlobalScope.launch { bot.handleUpdates() }

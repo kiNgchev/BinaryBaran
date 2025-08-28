@@ -36,9 +36,7 @@ public suspend fun tits(update: MessageUpdate, user: User, client: TelegramBot) 
         appendEscaped(", красивые и огромные СИСЬКИ!")
     }
 
-    sendMessageWEH({
-        message
-    }, update, client)
+    sendMessageWEH(update, client) { message }
 }
 
 @CommonHandler.Regex("письки", options = [RegexOption.IGNORE_CASE])
@@ -58,7 +56,5 @@ public suspend fun penis(update: MessageUpdate, user: User, client: TelegramBot)
         }
     }
 
-    sendMessageWEH({
-        message
-    }, update, client)
+    sendMessageWEH(update, client) { message }
 }
