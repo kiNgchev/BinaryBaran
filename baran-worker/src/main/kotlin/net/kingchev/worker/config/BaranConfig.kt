@@ -39,7 +39,7 @@ public class BaranConfig(private val props: BaranProperties) {
         {
             identifier = "baran-bot"
             this.classManager = classManager
-            throwExOnActionsFailure = true
+            //throwExOnActionsFailure = true
         }
 
         GlobalScope.launch { bot.handleUpdates() }
