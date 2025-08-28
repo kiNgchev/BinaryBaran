@@ -26,6 +26,7 @@ package net.kingchev.worker.commands
 import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.annotations.ArgParser
 import eu.vendeli.tgbot.annotations.CommandHandler
+import eu.vendeli.tgbot.annotations.ParamMapping
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
@@ -53,10 +54,10 @@ public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, c
 
 @CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
 @ArgParser(BaranArgParser::class)
-public suspend fun hugs(@RequestParam param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun hugs(@ParamMapping("param1") param: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param1 ?: "себя"
+    val value = param ?: "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
