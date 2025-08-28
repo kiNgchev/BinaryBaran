@@ -33,6 +33,7 @@ import net.kingchev.shared.telegram.parser.BaranArgParser
 import net.kingchev.shared.telegram.utils.getReplyUserLink
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.sendMessageWEH
+import org.springframework.web.bind.annotation.RequestParam
 
 @CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
 @ArgParser(BaranArgParser::class)
@@ -50,12 +51,12 @@ public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, c
     sendMessageWEH(update, client) { "$author отсосал $purpose" }
 }
 
-@CommandHandler(["обнять", "обнять param_1"], scope = [UpdateType.MESSAGE])
-//@ArgParser(BaranArgParser::class)
-public suspend fun hugs(param_1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+@CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
+@ArgParser(BaranArgParser::class)
+public suspend fun hugs(@RequestParam param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param_1 ?: "себя"
+    val value = param1 ?: "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
