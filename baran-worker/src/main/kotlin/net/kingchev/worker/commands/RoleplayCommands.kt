@@ -36,13 +36,15 @@ import net.kingchev.shared.telegram.utils.sendMessageWEH
 
 @ArgParser(BaranArgParser::class)
 @CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
-public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
+
+    val value = param1 ?: "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
         user,
-        "себе"
+        value
     )
 
     sendMessageWEH(update, client) { "$author отсосал $purpose" }
@@ -50,13 +52,15 @@ public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, cl
 
 @ArgParser(BaranArgParser::class)
 @CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
-public suspend fun hugs(update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun hugs(param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
+
+    val value = param1 ?: "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
         user,
-        "себя"
+        value
     )
 
     sendMessageWEH(update, client) { "$author обнял $purpose" }
