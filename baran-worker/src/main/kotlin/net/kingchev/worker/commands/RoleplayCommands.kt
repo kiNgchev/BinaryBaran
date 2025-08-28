@@ -53,8 +53,8 @@ public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, c
 }
 
 @CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
-@ArgParser(BaranArgParser::class)
-public suspend fun hugs(@ParamMapping("param1") param: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+//@ArgParser(BaranArgParser::class)
+public suspend fun hugs(@ParamMapping("param_1") param: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
     val value = param ?: "себя"

@@ -22,6 +22,7 @@ import eu.vendeli.tgbot.TelegramBot
 import eu.vendeli.tgbot.api.message.SendMessageAction
 import eu.vendeli.tgbot.api.message.sendMessage
 import eu.vendeli.tgbot.types.component.MessageUpdate
+import eu.vendeli.tgbot.types.component.onFailure
 import eu.vendeli.tgbot.utils.builders.EntitiesCtxBuilder
 
 /**
@@ -30,14 +31,11 @@ import eu.vendeli.tgbot.utils.builders.EntitiesCtxBuilder
 public suspend fun sendMessageWEH(update: MessageUpdate,
                                   client: TelegramBot,
                                   block: EntitiesCtxBuilder<SendMessageAction>.() -> String) {
-    return try {
+    sendMessage {
+        block()
+    }.markdown().sendReturning(update.message.chat, client).onFailure {
         sendMessage {
-
-            block()
-
-        }.markdown().send(update.message.chat, client)
-    } catch (e: Exception) {
-        sendMessage { e.message.toString() }
-            .send(update.message.chat, client)
+            "code: ${it.errorCode} description: ${it.description}"
+        }.send(update.message.chat, client)
     }
 }
