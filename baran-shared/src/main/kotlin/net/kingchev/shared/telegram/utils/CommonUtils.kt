@@ -21,7 +21,9 @@ package net.kingchev.shared.telegram.utils
 import eu.vendeli.tgbot.interfaces.action.TgAction
 import eu.vendeli.tgbot.interfaces.features.OptionsFeature
 import eu.vendeli.tgbot.types.User
+import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.ParseMode
+import eu.vendeli.tgbot.types.msg.Message
 import eu.vendeli.tgbot.types.options.Options
 import eu.vendeli.tgbot.types.options.OptionsParseMode
 
@@ -34,6 +36,62 @@ public fun getUserLink(user: User): String {
     return buildString {
         append("[$fullName](tg://user?id=${user.id})")
     }
+}
+
+/**
+ * Gets the user being replied to.
+ *
+ * If `replyMessage` is null, returns null.
+ * Otherwise, returns the sender of `replyMessage`.
+ * If the sender is null or the same as `user`, returns `user`.
+ *
+ * @param replyMessage The message being replied to. Null if not a reply.
+ * @param user The user who sent the original message.
+ * @return The user being replied to, or null if there is no reply.
+ */
+public fun getReplyUser(replyMessage: Message?,
+                        user: User) : User? {
+    val isReply = replyMessage != null
+
+    var replyToUser: User? = null
+
+    if (isReply) {
+        val replySender = replyMessage.from ?: user
+        replyToUser = if (replySender.id == user.id) user else replySender
+    }
+
+    return replyToUser
+}
+
+
+/**
+ * Gets the purpose string for a reply message.
+ *
+ * If `replyMessage` is not a reply to another user, returns `default`.
+ * Otherwise, returns a link to the user being replied to.
+ *
+ * @param replyMessage The message being replied to. Null if not a reply.
+ * @param user The user who sent the original message.
+ * @param default The default value to return if not replying to another user.
+ * @return Link to the replied user or default value if not applicable.
+ */
+public fun getReplyUserLink(replyMessage: Message?,
+                        user: User,
+                        default: String) : String? {
+
+    val replier = if (getReplyUser(replyMessage, user) == null) {
+        user
+    } else {
+        getReplyUser(replyMessage, user)
+    }
+
+    val purpose: String? = if (replier == user) {
+        default
+    } else {
+        replier!!.link
+    }
+
+    return purpose
 }
 
 @Suppress("NOTHING_TO_INLINE")

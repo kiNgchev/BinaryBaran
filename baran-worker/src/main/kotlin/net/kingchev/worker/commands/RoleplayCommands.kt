@@ -1,6 +1,6 @@
 /*
  *     BinaryBaran
- *     Copyright (C) 2025 kiNgchev, NuclearMyraBey
+ *     Copyright (C) 2025 kiNgchev, NuclearMyraBey, Evgeny K.
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
 import net.kingchev.shared.telegram.parser.BaranArgParser
+import net.kingchev.shared.telegram.utils.getReplyUserLink
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.sendMessageWEH
 
@@ -37,12 +38,26 @@ import net.kingchev.shared.telegram.utils.sendMessageWEH
 @CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
 public suspend fun blowjob(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
-    sendMessageWEH(update, client) { "$author отсосал $param1" }
+
+    val purpose = getReplyUserLink(
+        update.message.replyToMessage,
+        user,
+        "себе"
+    )
+
+    sendMessageWEH(update, client) { "$author отсосал $purpose" }
 }
 
 @ArgParser(BaranArgParser::class)
 @CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
-public suspend fun hugs(param1: String, update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun hugs(update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
-    sendMessageWEH(update, client) { "$author обнял $param1" }
+
+    val purpose = getReplyUserLink(
+        update.message.replyToMessage,
+        user,
+        "себя"
+    )
+
+    sendMessageWEH(update, client) { "$author обнял $purpose" }
 }

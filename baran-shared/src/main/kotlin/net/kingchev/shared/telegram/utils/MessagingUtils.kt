@@ -31,9 +31,11 @@ public suspend fun sendMessageWEH(update: MessageUpdate,
                                   client: TelegramBot,
                                   block: EntitiesCtxBuilder<SendMessageAction>.() -> String) {
     return try {
-        sendMessage { block() }
-            .markdown()
-            .send(update.message.chat, client)
+        sendMessage {
+
+            block()
+
+        }.markdown().send(update.message.chat, client)
     } catch (e: Exception) {
         sendMessage { e.message.toString() }
             .send(update.message.chat, client)
