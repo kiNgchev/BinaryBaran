@@ -24,24 +24,20 @@
 package net.kingchev.worker.commands
 
 import eu.vendeli.tgbot.TelegramBot
-import eu.vendeli.tgbot.annotations.ArgParser
 import eu.vendeli.tgbot.annotations.CommandHandler
-import eu.vendeli.tgbot.annotations.ParamMapping
 import eu.vendeli.tgbot.types.User
 import eu.vendeli.tgbot.types.component.MessageUpdate
 import eu.vendeli.tgbot.types.component.UpdateType
-import net.kingchev.shared.telegram.parser.BaranArgParser
 import net.kingchev.shared.telegram.utils.getReplyUserLink
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.sendMessageWEH
-import org.springframework.web.bind.annotation.RequestParam
 
+// TODO: parse args
 @CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
-@ArgParser(BaranArgParser::class)
-public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun blowjob(update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param1 ?: "себе"
+    val value = "себе"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
@@ -52,12 +48,12 @@ public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, c
     sendMessageWEH(update, client) { "$author отсосал $purpose" }
 }
 
+// TODO: parse args
 @CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
-//@ArgParser(BaranArgParser::class)
-public suspend fun hugs(@ParamMapping("param_1") param: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+public suspend fun hugs(update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param ?: "себя"
+    val value = "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
