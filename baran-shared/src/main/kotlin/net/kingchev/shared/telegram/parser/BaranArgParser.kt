@@ -28,6 +28,7 @@ public object BaranArgParser : ArgumentParser {
             result["param$index"] = arg
             index++
         }
+        
         return result
     }
 }

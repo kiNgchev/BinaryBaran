@@ -34,12 +34,12 @@ import net.kingchev.shared.telegram.utils.getReplyUserLink
 import net.kingchev.shared.telegram.utils.link
 import net.kingchev.shared.telegram.utils.sendMessageWEH
 
-@ArgParser(BaranArgParser::class)
 @CommandHandler(["отсосать"], scope = [UpdateType.MESSAGE])
+@ArgParser(BaranArgParser::class)
 public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param1 ?: "себя"
+    val value = param1 ?: "себе"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
@@ -50,12 +50,12 @@ public suspend fun blowjob(param1: String?, update: MessageUpdate, user: User, c
     sendMessageWEH(update, client) { "$author отсосал $purpose" }
 }
 
-@ArgParser(BaranArgParser::class)
-@CommandHandler(["обнять"], scope = [UpdateType.MESSAGE])
-public suspend fun hugs(param1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
+@CommandHandler(["обнять", "обнять param_1"], scope = [UpdateType.MESSAGE])
+//@ArgParser(BaranArgParser::class)
+public suspend fun hugs(param_1: String?, update: MessageUpdate, user: User, client: TelegramBot) {
     val author = user.link
 
-    val value = param1 ?: "себя"
+    val value = param_1 ?: "себя"
 
     val purpose = getReplyUserLink(
         update.message.replyToMessage,
